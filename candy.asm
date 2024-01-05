@@ -1,15 +1,66 @@
 [org 0x0100]
 jmp start
 ;initializes the random values on board
-printStartingScreen:
-    
+
+
+printEndingScreen:
+pusha
+
+call clearscreen1
+mov ah,0x13
+ mov al,1
+   mov bh,0
+      mov bl,00110001b
+   mov dx,0x0c27
+   mov cx,13
+   push cs
+   pop es
+   mov bp,endingMessage
+   int 0x10
+
+popa
+ret
+
+printBoundary:
+pusha
+mov ax,0xb800
+mov es,ax
+mov di,0
+mov ah,00011110b
+mov al,0x3
+pp1:
+mov word[es:di],ax
+add di,2
+cmp di,158
+jne pp1
+
+pp2:
+mov word[es:di],ax
+add di,160
+cmp di,3998
+jne pp2
+
+pp3:
+mov word[es:di],ax
+sub di,2
+cmp di,3840
+jne pp3
+
+pp4:
+mov word[es:di],ax
+sub di,160
+cmp di,0
+jne pp4
+
+
+popa
+ret
 
 
 printCandies:
  pusha
   mov ax,0xb800
   mov es,ax
-
   mov di,372
   mov cx,8
   mov si,0
@@ -29,9 +80,6 @@ printCandies:
     dec dx
     jnz printOuterLoop
       
-       
-  
- 
  popa
  ret
 
@@ -136,9 +184,9 @@ printUI:
   mov si,di
   add si,160
   call box
- add di,480
- cmp di,4066
- jne bx3
+  add di,480
+  cmp di,4066
+  jne bx3
 
   mov di,234
  bx4:
@@ -484,21 +532,6 @@ checkPattern22:  ; this recieves ax,bx,cx,dx,di in same condition and it will re
  exitCheckPattern22:
  popa
  ret
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2093,8 +2126,216 @@ GenRandNum:
 
     pop bp;
     ret
+green:
+  pusha
+
+  green1:
+
+  mov di,0
+  mov si,3840
+  call linePrint
+  call delay
+
+  mov di,2
+  mov si,3842
+  call linePrint
+  call delay
+  mov di,4
+  mov si,3844
+  call linePrint
+  call delay
+  mov di,6
+  mov si,3846
+  call linePrint
+  call delay
+  mov di,8
+  mov si,3848
+  call linePrint
+call delay
+mov di,10
+mov si,3850
+call linePrint
+call delay
+
+mov di,172
+mov si,3692
+call linePrint
+call delay
+
+mov di,334
+mov si,3534
+call linePrint
+call delay
+
+mov di,496
+mov si,3376
+call linePrint
+call delay
+
+mov di,658
+mov si,3218
+call linePrint
+call delay
+
+mov di,820
+mov si,3060
+call linePrint
+
+
+mov di,982
+mov si,3062
+call linePrint
+call delay
+
+mov di,1144
+mov si,2904
+call linePrint
+
+mov di,1306
+mov si,2746
+call linePrint
+call delay
+
+mov di,1468
+mov si,2588
+call linePrint
+call delay
+
+mov di,1630
+mov si,2430
+call linePrint
+call delay
+
+mov di,1792
+mov si,2272
+call linePrint
+call delay
+
+mov di,1954
+mov si,2274
+call linePrint
+call delay
+
+
+green2:
+mov di,158
+mov si,3998
+call linePrint
+call delay
+mov di,156
+mov si,3996
+call linePrint
+call delay
+
+mov di,154
+mov si,3994
+call linePrint
+call delay
+
+mov di,152
+mov si,3992
+call linePrint
+call delay
+mov di,150
+mov si,3990
+call linePrint
+call delay
+
+mov di,148
+mov si,3988
+call linePrint
+call delay
+
+mov di,306
+mov si,3826
+call linePrint
+call delay
+
+mov di,464
+mov si,3664
+call linePrint
+call delay
+
+mov di,622
+mov si,3502
+call linePrint
+call delay
+mov di,780
+mov si,3340
+call linePrint
+call delay
+
+mov di,938
+mov si,3178
+call linePrint
+call delay
+
+mov di,1096
+mov si,3016
+call linePrint
+call delay
+
+mov di,1254
+mov si,2854
+call linePrint
+
+
+mov di,1412
+mov si,2692
+call linePrint
+call delay
+mov di,1570
+mov si,2530
+call linePrint
+call delay
+
+mov di,1728
+mov si,2368
+call linePrint
+call delay
+mov di,1886
+mov si,2206
+call linePrint
+call delay
+mov word[es:2044],ax
+
+popa
+ret
+
+linePrint:
+  loop100:
+  mov word[es:di],ax
+  add di,160
+  cmp di,si
+  jne loop100
+
+  ret
+
+printPattern:
+pusha
+call clearscreen1
+call printBoundary
+mov ax,0xb800
+mov es,ax
+;green
+mov ah,00011010b
+mov al,0x2
+call green
+
+
+popa
+ret
+
+printStartingScreen:
+call clearscreen1
+call printPattern
+call printBoundary
+call clearscreen1
+
+ret
 subroutines:
 start:
+call printStartingScreen
  mov dx,board
 call newGame
 call printCandies
@@ -2204,7 +2445,7 @@ continue100:
 dec word[moves]
 cmp word[moves],0
 jne gameLoop
-
+call printEndingScreen
 
 
 mov ax,0x4c00
@@ -2237,3 +2478,4 @@ undoSourceElement: dw 0
 undoDestElement: dw 0
 undoDestIndex: dw 0
 isValid2: dw 0
+endingMessage: db 'OUT OF MOVES!'  ; 13
