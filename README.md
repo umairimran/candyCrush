@@ -22,13 +22,7 @@ Please adhere to this project's `code of conduct`.
 
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)![Screenshot (397)](https://github.com/umairimran/candyCrush/assets/66002305/05cdea7c-e1a4-4917-b51b-544085053fc5)
 
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)![Screenshot (398)](https://github.com/umairimran/candyCrush/assets/66002305/d4452313-4c15-4ccf-929d-7d90130942db)
 
 ## Used By
 
