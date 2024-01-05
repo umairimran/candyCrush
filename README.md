@@ -1,7 +1,7 @@
 
 # Candy Crush  Assembly Language 8086 processor.❄️❄️
 
-"Crafted in assembly language, this Candy Crush clone features intricate low-level programming, showcasing a bomb function. When five candies align, a dynamic burst mechanism triggers, annihilating all occurrences with accompanying sound effects for an immersive gaming experience."
+"Crafted in assembly language, this Candy Crush clone features intricate low-level programming, showcasing a **bomb** function. When five candies align, a dynamic burst mechanism triggers, annihilating all occurrences with accompanying sound effects for an immersive gaming experience."
 
 
 ## Authors  😎 
